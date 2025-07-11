@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= profile.name %> | Blog</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+    .paper { background: #fff; padding: 2rem; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    h1, h2 { margin-top: 0; }
+    .projects a { text-decoration: none; color: #1976d2; }
+    .skills span { background: #e0f7fa; margin-right: 8px; padding: 4px 8px; border-radius: 6px; display: inline-block; }
+    a { color: #1976d2; text-decoration: none; }
+    .paper ul {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+}
+.paper li {
+  margin-bottom: 0.5rem;
+}
+.skills span {
+  background: #e0f7fa;
+  margin: 4px 8px 4px 0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+  </style>
+</head>
+<body>
+
+  <%- include('partials/header') %>
+
+  <div class="paper">
+    <h2>About Me</h2>
+     <hr/>
+    <h3><%= profile.title %></h3>
+    <p><%= profile.summary %></p>
+  </div>
+
+  <div class="paper">
+  <h2>Technical Skills</h2>
+  <hr/>
+  <% Object.keys(profile.skills).forEach(category => { %>
+    <div style="margin-bottom: 1rem;">
+      <h4><%= category %></h4>
+      <div class="skills">
+        <% profile.skills[category].forEach(skill => { %>
+          <span><%= skill %></span>
+        <% }) %>
+      </div>
+    </div>
+  <% }); %>
+</div>
+
+  <div class="paper">
+  <h2>Work Experience</h2>
+   <hr/>
+  <% profile.workExperience.forEach(job => { %>
+    <div style="margin-bottom: 1.5rem;">
+      <h3><%= job.role %> at <%= job.company %></h3>
+      <p><strong>Location:</strong> <%= job.location %> <strong>Duration:</strong> <%= job.duration %></p>
+      <p></p>
+      <ul>
+        <% job.achievements.forEach(point => { %>
+          <li><%= point %></li>
+        <% }); %>
+      </ul>
+    </div>
+  <% }); %>
+</div>
+
+<div class="paper" id="projects">
+  <h2>Projects</h2>
+  <hr/>
+  <div class="projects">
+    <% profile.projects.forEach((project, index) => { %>
+      <div style="margin-bottom: 1.5rem;">
+        <p>
+          <strong><%= index + 1 %>. <%= project.name %></strong>
+          - <a href="<%= project.link %>" target="_blank">GitHub Link</a><br/>
+          <strong>Tech Stack:</strong> <%= project.stack %><br/>
+          <strong>Description:</strong> <%= project.description %>
+        </p>
+      </div>
+    <% }); %>
+  </div>
+</div>
+
+
+  <div class="paper">
+    <h2>Education</h2>
+     <hr/>
+    <p><%= profile.education %></p>
+  </div>
+
+  <%- include('partials/footer') %>
+
+</body>
+</html>
