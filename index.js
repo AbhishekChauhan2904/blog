@@ -132,6 +132,6 @@ app.post('/contact', (req, res) => {
   res.send(`<h1>Thank you, ${name}!</h1><p>Your message has been received.</p><a href="/">Back to Home</a>`);
 });
 
-app.listen(port, () => {
-   console.log(`Server running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
